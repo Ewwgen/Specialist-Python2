@@ -1,3 +1,7 @@
+index_rank = {'2': 0, '3': 1, '4': 2, '5': 3, '6': 4, '7': 5, '8': 6, '9': 7, '10': 8, 'J': 9, 'Q': 10, 'K': 11,
+              'A': 12}
+suits_rank = ['Spades', 'Clubs', 'Diamonds', 'Hearts']
+
 class Card:
     def __init__(self, suit, index):
         self.suit = suit
@@ -19,11 +23,9 @@ class Card:
         return self.suit == other.suit
 
     def more(self, other):
-        index_rank = {'2':0, '3':1, '4':2, '5':3, '6':4, '7':5, '8':6, '9':7, '10':8, 'J':9, 'Q':10, 'K':11, 'A':12}
         return index_rank[self.index]>index_rank[other.index]
 
     def less(self, other):
-        index_rank = {'2':0, '3':1, '4':2, '5':3, '6':4, '7':5, '8':6, '9':7, '10':8, 'J':9, 'Q':10, 'K':11, 'A':12}
         return index_rank[self.index]<index_rank[other.index]
 
 card01 = Card('Hearts','J')
@@ -60,13 +62,16 @@ class Deck:
         # Список карт в колоде. Каждым элементом списка будет объект класса Card
         self.cards = []
         index_rank = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-        suits_rank = ['Spades', 'Clubs', 'Diamonds', 'Hearts']
 
         for suit in suits_rank:
             for ind in index_rank:
                 # Card(suit, ind).to_str()
                 self.cards.append(Card(suit, ind))
 
+    def __getitem__(self, index):
+        return self.cards[index]
+
 deck = Deck()
-print(deck[0])
+deck.cards[1].to_str()
+deck[1].to_str()
 
